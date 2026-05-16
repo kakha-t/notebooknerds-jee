@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>MacBook Ankauf - Notebooknerds</title>
+</h:head>
+<h:body>
+    <h1>🍎 Notebooknerds – MacBook Ankauf</h1>
+
+    <div class="inhalt">
+	    <!-- SUCHFELD: Auftragsstatus prüfen -->
+	<div class="status-suche-box">
+	    <h2 class="status-suche-titel">🔍 Auftragsstatus prüfen</h2>
+	    <p class="status-suche-text">
+	        Haben Sie bereits eine Auftragsnummer?
+	        Geben Sie diese hier ein:
+	    </p>
+	    <h:form>
+	        <h:inputText
+	            value="#{auftragBean.sucheId}"
+	            placeholder="Auftragsnummer z.B. 5"
+	            styleClass="status-suche-input" />
+	        <h:commandButton
+	            value="Status prüfen →"
+	            actionListener="#{auftragBean.statusPruefen()}"
+	            styleClass="status-suche-btn" />
+	    </h:form>
+	</div>
+        <h2>MacBook Ankauf Anfrage</h2>
+
+        <h:form>
+            <h:panelGrid columns="2" columnClasses="label-col,input-col" styleClass="formular-tabelle">
+
+                <h:outputLabel value="Typ:" />
+                <h:selectOneMenu value="#{auftragBean.auftrag.typ}">
+                    <f:selectItem itemValue="MacBook Air" itemLabel="MacBook Air" />
+                    <f:selectItem itemValue="MacBook Pro" itemLabel="MacBook Pro" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Baujahr:" />
+                <h:selectOneMenu value="#{auftragBean.auftrag.baujahr}">
+                    <f:selectItem itemValue="2025" itemLabel="2025" />
+                    <f:selectItem itemValue="2024" itemLabel="2024" />
+                    <f:selectItem itemValue="2023" itemLabel="2023" />
+                    <f:selectItem itemValue="2022" itemLabel="2022" />
+                    <f:selectItem itemValue="2021" itemLabel="2021" />
+                    <f:selectItem itemValue="2020" itemLabel="2020" />
+                    <f:selectItem itemValue="2019" itemLabel="2019" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Zoll:" />
+                <h:selectOneMenu value="#{auftragBean.auftrag.zoll}">
+                    <f:selectItem itemValue="13" itemLabel="13 Zoll" />
+                    <f:selectItem itemValue="14" itemLabel="14 Zoll" />
+                    <f:selectItem itemValue="15" itemLabel="15 Zoll" />
+                    <f:selectItem itemValue="16" itemLabel="16 Zoll" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Zustand:" />
+                <h:selectOneMenu value="#{auftragBean.auftrag.zustand}">
+                    <f:selectItem itemValue="gut" itemLabel="Gut" />
+                    <f:selectItem itemValue="akzeptabel" itemLabel="Akzeptabel" />
+                    <f:selectItem itemValue="schlecht" itemLabel="Schlecht" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Schadenstyp:" />
+                <h:selectOneMenu value="#{auftragBean.auftrag.schaden}">
+                    <f:selectItem itemValue="Sonstige Schaden" itemLabel="Sonstige Schaden" />
+                    <f:selectItem itemValue="Flüssigkeitsschaden" itemLabel="Flüssigkeitsschaden" />
+                    <f:selectItem itemValue="Displayschaden" itemLabel="Displayschaden" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Deutsche Tastatur:" />
+                <h:selectBooleanCheckbox value="#{auftragBean.auftrag.tastaturDeutsch}" />
+
+                <h:outputLabel value="Netzteil vorhanden:" />
+                <h:selectBooleanCheckbox value="#{auftragBean.auftrag.netzteil}" />
+
+            </h:panelGrid>
+
+            <br/>
+            <h:commandButton value="Preis berechnen" action="#{auftragBean.preisBerechnen}" styleClass="btn-green" />
+
+            <h:panelGroup rendered="#{auftragBean.preisBerechnet}">
+                <div class="angebot-box">
+                    <h2>💶 Unser Angebot: #{auftragBean.auftrag.angebotspreis} €</h2>
+                    <p>Wenn Sie mit diesem Angebot einverstanden sind, füllen Sie bitte Ihre Daten aus:</p>
+                </div>
+
+                <h:panelGrid columns="2" columnClasses="label-col,input-col" styleClass="formular-tabelle">
+                    <h:outputLabel value="Ihr Name:" />
+                    <h:inputText value="#{auftragBean.auftrag.kundeName}" />
+
+                    <h:outputLabel value="Ihre E-Mail:" />
+                    <h:inputText value="#{auftragBean.auftrag.kundeEmail}" />
+                </h:panelGrid>
+
+                <br/>
+                <h:commandButton value="✅ Auftrag absenden" action="#{auftragBean.auftragSenden}" styleClass="btn-green" />
+            </h:panelGroup>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

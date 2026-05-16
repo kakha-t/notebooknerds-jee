@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Bestätigung - Notebooknerds</title>
+</h:head>
+<h:body>
+    <h1>🍎 Notebooknerds – Bestätigung</h1>
+
+    <div class="inhalt bestaetigung-box">
+
+        <div class="bestaetigung-icon">✅</div>
+        <h2 class="bestaetigung-titel">Vielen Dank!</h2>
+        <p class="bestaetigung-text">Ihr Auftrag wurde erfolgreich übermittelt.</p>
+
+        <div class="angebot-box auftragsnummer-box">
+            <p class="auftragsnummer-label">Ihre Auftragsnummer:</p>
+            <div class="auftragsnummer-zahl">#{auftragBean.letzteAuftragId}</div>
+            <p class="auftragsnummer-hinweis">📌 Bitte notieren Sie sich diese Nummer!</p>
+        </div>
+
+        <p class="bestaetigung-text">Mit dieser Nummer können Sie jederzeit Ihren Status prüfen:</p>
+
+        <div class="bestaetigung-links">
+            <h:outputLink value="auftragServlet" styleClass="btn-karte btn-kunde">
+                <f:param name="id" value="#{auftragBean.letzteAuftragId}" />
+                🔍 Auftragsstatus prüfen
+            </h:outputLink>
+        </div>
+
+        <br/>
+        <h:link value="← Neue Anfrage stellen" outcome="ankauf" styleClass="link-zuruck" />
+
+    </div>
+</h:body>
+</html>

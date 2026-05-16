@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="fish.payara.eclipse.tools.server.lib.system">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/org.eclipse.persistence.jpa.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/org.eclipse.persistence.core.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/jta.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/jakarta.persistence.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/jakarta.enterprise.cdi-api.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/jakarta.servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/payara5/glassfish/modules/jakarta.faces.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

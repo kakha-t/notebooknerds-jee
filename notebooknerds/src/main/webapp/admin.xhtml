@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Admin - Notebooknerds</title>
+</h:head>
+<h:body>
+    <h1>Admin - Auftragsübersicht</h1>
+
+    <h:dataTable value="#{adminBean.alleAuftraege}" var="a" border="1">
+	    <h:column><f:facet name="header">ID</f:facet>#{a.id}</h:column>
+	    <h:column><f:facet name="header">Typ</f:facet>#{a.typ}</h:column>
+	    <h:column><f:facet name="header">Baujahr</f:facet>#{a.baujahr}</h:column>
+	    <h:column><f:facet name="header">Zoll</f:facet>#{a.zoll}</h:column>
+	    <h:column><f:facet name="header">Zustand</f:facet>#{a.zustand}</h:column>
+	    <h:column><f:facet name="header">Schadenstyp</f:facet>#{a.schaden}</h:column>
+	    <h:column>
+	        <f:facet name="header">Deutsche Tastatur</f:facet>
+	        #{a.tastaturDeutsch ? 'Ja' : 'Nein'}
+	    </h:column>
+	    <h:column>
+	        <f:facet name="header">Netzteil</f:facet>
+	        #{a.netzteil ? 'Ja' : 'Nein'}
+	    </h:column>
+	    <h:column><f:facet name="header">Preis</f:facet>#{a.angebotspreis} €</h:column>
+	    <h:column>
+		    <f:facet name="header">Status</f:facet>
+		    <h:outputText value="#{a.status}"
+		        styleClass="#{a.status == 'OFFEN' ? 'status-offen' :
+		                      a.status == 'ANGENOMMEN' ? 'status-angenommen' :
+		                      a.status == 'ABGELEHNT' ? 'status-abgelehnt' :
+		                      a.status == 'GEGENANGEBOT' ? 'status-gegenangebot' :
+		                      'status-abgelehnt-kunde'}" />
+		</h:column>
+	    <h:column><f:facet name="header">Kunde</f:facet>#{a.kundeName}</h:column>
+	    <h:column>
+		    <f:facet name="header">Auftragsdatum</f:facet>
+		    <h:outputText value="#{a.erstelltAm != null ? a.erstelltAm : 'unbekannt'}">
+		        <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Berlin"/>
+		    </h:outputText>
+		</h:column>
+	    <h:column>
+	        <f:facet name="header">Aktion</f:facet>
+	        <h:form>
+	            <h:panelGroup rendered="#{a.status == 'OFFEN' or a.status == 'GEGENANGEBOT'}">
+	                <h:commandButton value="Annehmen" 
+	                    action="#{adminBean.annehmen(a.id)}" />
+	                <h:commandButton value="Ablehnen" 
+	                    action="#{adminBean.ablehnen(a.id)}" />
+	                <br/><br/>
+	                <h:outputLabel value="Gegenangebot (€):" />
+	                <h:inputText value="#{adminBean.gegenangebotPreise[a.id]}" size="8" />
+	                <h:commandButton value="Gegenangebot senden" 
+	                    action="#{adminBean.gegenangebot(a.id)}" />
+	            </h:panelGroup>
+	
+	            <h:panelGroup rendered="#{a.status == 'ANGENOMMEN' or a.status == 'ABGELEHNT' or a.status == 'ABGELEHNT_DURCH_KUNDE'}">
+	                <h:commandButton value="✏️" 
+	                    action="#{adminBean.bearbeitungUmschalten(a.id)}"
+	                    title="Bearbeiten" />
+	                <h:panelGroup rendered="#{adminBean.isBearbeitungsModus(a.id)}">
+	                    <br/><br/>
+	                    <h:outputLabel value="Gegenangebot (€):" />
+	                    <h:inputText value="#{adminBean.gegenangebotPreise[a.id]}" size="8" />
+	                    <h:commandButton value="Gegenangebot senden" 
+	                        action="#{adminBean.gegenangebot(a.id)}" />
+	                </h:panelGroup>
+	            </h:panelGroup>
+	        </h:form>
+	    </h:column>
+	</h:dataTable>
+
+</h:body>
+</html>
